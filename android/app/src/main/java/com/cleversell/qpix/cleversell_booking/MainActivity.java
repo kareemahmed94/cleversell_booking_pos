@@ -70,13 +70,13 @@ public class MainActivity extends FlutterActivity {
                                     @Override
                                     public void run() {
                                         FitPrintAndroidLan printer = new FitPrintAndroidLan();
-                                        int response = printer.Connect(ip);
+                                        int response = printer.Connect("192.168.1.11:9100");
                                         // printer.SetFont(true, true, true, true);
                                         Log.d("printerOutput of connect", String.format("value = %d", response));
-                                        assert invoice != null;
-                                        printInvoiceData(printer, invoice);
-                                        printInvoiceData(printer, invoice);
-                                        Log.d("printerOutput of cut paper", String.format("value = %d", response));
+//                                        assert invoice != null;
+//                                        printInvoiceData(printer, invoice);
+//                                        printInvoiceData(printer, invoice);
+//                                        Log.d("printerOutput of cut paper", String.format("value = %d", response));
                                         printer.Disconnect();
 //
 //                                        Log.d("is this thing working???", "I certainly hope so");

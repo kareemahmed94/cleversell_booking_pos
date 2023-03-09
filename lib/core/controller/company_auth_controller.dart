@@ -107,12 +107,25 @@ class CompanyAuthController extends GetxController
   }
 
   void testPrinter() async {
-    try {
-      var data = {'invoice': booking, 'ip': '192.16.1.11'};
-      value = await platform.invokeMethod("printInvoice", data);
-    } catch (e) {
-      print(e);
+    // try {
+    //   var data = {'invoice': booking, 'ip': '192.16.1.11'};
+    //   value = await platform.invokeMethod("printInvoice", data);
+    // } catch (e) {
+    //   print(e);
+    // }
+
+    const PaperSize paper = PaperSize.mm80;
+    final profile = await CapabilityProfile.load();
+    final printer = NetworkPrinter(paper, profile);
+
+    final PosPrintResult res = await printer.connect('192.168.1.11', port: 9100);
+
+    if (res == PosPrintResult.success) {
+      testReceipt(printer);
+      printer.disconnect();
     }
+
+    print('Print result: ${res.msg}');
   }
 
   void testReceipt(NetworkPrinter printer) {
