@@ -1,4 +1,5 @@
 import 'package:cleversell_booking/core/controller/staff_auth_controller.dart';
+import 'package:cleversell_booking/ui/widgets/common/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -63,9 +64,14 @@ class StaffAuthScreen extends StatelessWidget {
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 20, bottom: 30),
-                      child: _staffSlider(context),
+                      child: Center(),
                     ),
-                    _password(context)
+                    _username(context),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    _password(context),
+                    _loginBtn(context)
                   ],
                 )),
               );
@@ -154,12 +160,39 @@ class StaffAuthScreen extends StatelessWidget {
     );
   }
 
+  Widget _username(context) {
+    return SizedBox(
+      width: 200,
+      height: 40,
+      child: TextFormField(
+        // focusNode: controller.focusNode,
+        keyboardType: TextInputType.number,
+        controller: controller.staffId,
+        style: const TextStyle(color: background),
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: primaryDim,
+          floatingLabelBehavior: FloatingLabelBehavior.never,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+          labelText: 'Type Your ID Here',
+        ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Staff ID field is required';
+          }
+          return null;
+        },
+      ),
+    );
+  }
   Widget _password(context) {
     return SizedBox(
       width: 200,
       height: 40,
       child: TextFormField(
-        focusNode: controller.focusNode,
+        // focusNode: controller.focusNode,
         controller: controller.password,
         style: const TextStyle(color: background),
         obscureText: true,
@@ -170,7 +203,7 @@ class StaffAuthScreen extends StatelessWidget {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5.0),
           ),
-          labelText: 'Type Password Here',
+          labelText: 'Type Your Password Here',
         ),
         validator: (value) {
           if (value == null || value.isEmpty) {
@@ -178,8 +211,42 @@ class StaffAuthScreen extends StatelessWidget {
           }
           return null;
         },
-        onFieldSubmitted: (value) => controller.login(),
       ),
     );
   }
+  Widget _loginBtn(context) {
+    final List<Color> loaderColors = [
+      Colors.black,
+    ];
+    return Container(
+      margin: const EdgeInsets.only(top: 30),
+      width: 150,
+      height: 60,
+      child: ElevatedButton(
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.pressed)) {
+                  return null;
+                }
+                return success;
+              },
+            ),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ))),
+        onPressed: () => controller.login(),
+        child: controller.loading ? Loader(colors: loaderColors)
+        //     ? CircularProgressIndicator(
+        //   value: controller.animationController?.value,
+        //   semanticsLabel: 'Circular progress indicator',
+        //   color: background,
+        // )
+            : const Text("Login",
+            style: TextStyle(fontSize: 35, fontWeight: FontWeight.w400)),
+      ),
+    );
+  }
+
 }

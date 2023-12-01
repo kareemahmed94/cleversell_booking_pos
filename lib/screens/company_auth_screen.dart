@@ -4,6 +4,8 @@ import '../core/constants/colors.dart';
 import '../core/controller/splash_controller.dart';
 import 'package:get/get.dart';
 
+import '../ui/widgets/common/loader.dart';
+
 class CompanyAuthScreen extends StatelessWidget {
   final CompanyAuthController controller;
 
@@ -157,6 +159,9 @@ class CompanyAuthScreen extends StatelessWidget {
   }
 
   Widget _loginBtn(context) {
+    final List<Color> loaderColors = [
+      Colors.black,
+    ];
     return Container(
       margin: const EdgeInsets.only(top: 30),
       width: 150,
@@ -175,14 +180,10 @@ class CompanyAuthScreen extends StatelessWidget {
                 RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),
             ))),
-        // onPressed: () => controller.login(context),
-        onPressed: () => controller.testPrinter(),
+        onPressed: () => controller.login(context),
+        // onPressed: () => controller.testPrinter(),
         child: controller.loading
-            ? CircularProgressIndicator(
-                value: controller.animationController?.value,
-                semanticsLabel: 'Circular progress indicator',
-                color: background,
-              )
+            ? Loader(colors: loaderColors)
             : const Text("Enter",
                 style: TextStyle(fontSize: 35, fontWeight: FontWeight.w400)),
       ),

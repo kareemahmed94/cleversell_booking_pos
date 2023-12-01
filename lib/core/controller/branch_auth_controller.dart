@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:esc_pos_printer/esc_pos_printer.dart';
+import 'package:esc_pos_utils/esc_pos_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -83,10 +85,27 @@ class BranchAuthController extends GetxController
     Get.toNamed(companyAuthRoute);
   }
 
-  void login() {
+  void login() async {
+    final printerConnection = await tryPrinterConnection(printerIp.text);
+    if (printerConnection) {
+      prefs?.setString('printer_conn', 'true');
+    }
     prefs?.setString('branch', selectedBranch);
     prefs?.setString('server_ip', serverIp.text);
     prefs?.setString('printer_ip', printerIp.text);
     Get.toNamed(staffAuthRoute);
+  }
+
+  Future<bool> tryPrinterConnection(printerIP) async {
+    const PaperSize paper = PaperSize.mm80;
+    final profile = await CapabilityProfile.load();
+    final printer = NetworkPrinter(paper, profile);
+
+    final PosPrintResult res = await printer.connect(printerIP, port: 9100);
+
+    if (res == PosPrintResult.success) {
+      return true;
+    }
+    return false;
   }
 }

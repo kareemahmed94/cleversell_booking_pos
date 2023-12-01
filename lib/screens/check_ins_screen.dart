@@ -28,7 +28,7 @@ class CheckInsScreen extends StatelessWidget {
 
   Widget _body(context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20.0, right: 10.0, left: 20.0),
+      padding: const EdgeInsets.only(top: 20.0, right: 10.0, left: 20.0, bottom: 50.0),
       child: Column(
         children: [
           Padding(

@@ -16,3 +16,4 @@ const Color background = Color(0xFF191b2a);
 const Color border = Color(0xFF979797);
 const Color error = Color(0xFFff2434);
 const Color success = Color(0xFF6dd400);
+const Color inputBackground = Color(0xFFFCE8A0);

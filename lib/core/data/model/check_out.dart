@@ -43,12 +43,12 @@ class CheckOutModel {
     date = json['value']['date'];
     time = json['value']['time'];
     customerId = json['value']?['user']?['id'];
-    customerName = json['value']?['user']['name'];
-    customerPhone = json['value']?['user']['phone'];
+    customerName = json['value']?['user']?['name'] ?? '';
+    customerPhone = json['value']?['user']?['phone'] ?? '';
     price = '';
     productId = json['value']?['product']?['id'];
-    productName = json['value']?['product']?['name'];
-    productPrice = json['value']?['product']?['price'];
+    productName = json['value']?['product']?['name'] ?? '';
+    productPrice = json['value']?['product']?['price'] ?? '';
     promoCode = json['value']?['promo']?['code'];
     promoCodeValue = json['value']?['promo']?['value'];
   }

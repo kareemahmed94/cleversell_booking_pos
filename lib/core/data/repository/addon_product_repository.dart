@@ -8,6 +8,6 @@ class AddonProductRepository extends Repository {
   AddonProductRepository();
 
   getAddonProducts() async {
-    return await Client().get(promoCodesListPath);
+    return await Client().get(addonsListPath);
   }
 }

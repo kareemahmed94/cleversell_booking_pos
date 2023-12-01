@@ -25,7 +25,9 @@ class AddonProductModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
+    data['_id'] = id;
+    data['name'] = name;
+    data['price'] = price;
     return data;
   }
 }

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
 class Loader extends StatefulWidget {
-  const Loader({super.key});
+  final List<Color>? colors;
+
+  const Loader({super.key, this.colors});
 
   @override
   State<Loader> createState() => _LoaderState();
@@ -11,19 +13,20 @@ class Loader extends StatefulWidget {
 
 /// AnimationControllers can be created with `vsync: this` because of TickerProviderStateMixin.
 class _LoaderState extends State<Loader> {
-  final List<Color> _kDefaultRainbowColors = [
-    highlight,
-    Colors.orange,
-  ];
+
 
   @override
   Widget build(BuildContext context) {
+    final List<Color> kDefaultRainbowColors = widget.colors ?? [
+      highlight,
+      Colors.orange,
+    ];
     return Center(
       child: SizedBox(
         width: 40,
         child: LoadingIndicator(
           indicatorType: Indicator.circleStrokeSpin,
-          colors: _kDefaultRainbowColors,
+          colors: kDefaultRainbowColors,
           strokeWidth: 2.0,
         ),
       ),

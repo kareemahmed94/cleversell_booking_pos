@@ -10,4 +10,8 @@ class ProductRepository extends Repository {
   getProducts() async {
     return await Client().get(checkInProductList);
   }
+
+  getRoomProducts(roomId) async {
+    return await Client().get('$productsOfRoomListPath?startkey=%22${roomId}%22&endkey=%22${roomId}%22');
+  }
 }

@@ -16,9 +16,22 @@ class CustomerRepository extends Repository {
     }
     return await Client().get(path);
   }
+  getCustomer(id) async {
+    var path = getCustomerPath;
+    if(id != null) {
+      path = getCustomerPath.replaceAll('%FILTERS%', id);
+    }
+    return await Client().get(path);
+  }
 
   createCustomer(data) async {
     print(jsonEncode(data));
     return await Client().post(addCustomerPath, jsonEncode(data));
+  }
+
+  updateCustomer(data,id) async {
+    print(id);
+    print(jsonEncode(data));
+    return await Client().put('$addCustomerPath$id', jsonEncode(data));
   }
 }

@@ -17,6 +17,9 @@ const roomsListPath = 'rooms/_design/allRooms/_view/new-view';
 const customersListPath =
     'users/_design/getByPhone/_view/new-view?%FILTERS%limit=35';
 
+const getCustomerPath =
+    'users/_design/getById/_view/new-view?%FILTERS%limit=1';
+
 const addCustomerPath = 'users/';
 
 const checkInPath = 'check_ins/';
@@ -31,7 +34,8 @@ const checkInsLisPath = 'check_ins/_design/all-check-ins/_view/new-view';
 
 const checkOutsLisPath = 'check_outs/_design/all-check-outs/_view/new-view';
 
-const checkInsListByDatePath = 'check_ins/_design/search-date/_view/new-view';
+// const checkInsListByDatePath = 'check_ins/_design/search-date/_view/new-view';
+const checkInsListByDatePath = 'check_ins/_design/new-view/_view/search-date';
 
 const checkOutsListByDatePath = 'check_outs/_design/search-date/_view/new-view';
 
